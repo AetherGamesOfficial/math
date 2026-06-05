@@ -586,11 +586,12 @@
 
  
 <script type="module">
-import { p_ as sandstone } from "https://cdn.jsdelivr.net/npm/sandstone-proxy@0.2.0/dist/sandstone.mjs";
+import * as sandstone from "https://cdn.jsdelivr.net/npm/sandstone-proxy@0.2.0/dist/sandstone.mjs";
 
 function initAetherResearch() {
 
     const toolTargetKey = "aether-tool-target";
+    const staticWispUrl = "wss://wisp.mercurywork.shop/";
     const form = document.getElementById("uv-form");
     const address = document.getElementById("uv-address");
     const landingUi = document.getElementById("landing-ui");
@@ -687,7 +688,8 @@ function initAetherResearch() {
             <button class="close-tab">&times;</button>
         `;
 
-        const proxyFrame = new sandstone.ProxyFrame();
+        sandstone.libcurl.set_websocket(staticWispUrl);
+        const proxyFrame = new sandstone.controller.ProxyFrame();
         const iframeEl = proxyFrame.iframe;
         iframeEl.className = "web-viewport";
         iframeEl.style.display = "none";
